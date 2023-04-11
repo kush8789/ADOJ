@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    
+
+{% for problem in problems %}
+    {{forloop.counter}}
+    <a href="problem/{{problem.id}}">{{problem.name}}</a>
+{% endfor %}
+    
+
+{% endblock content %}
+    

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    
+
+{% for pr in problem %}
+    <p>{{pr.name}}</p>
+    <p>{{pr.statement}}</p>
+    <p>{{pr.code}}</p>
+    <p>{{pr.difficulty}}</p>
+{% endfor %}
+    
+
+{% endblock content %}
+    
