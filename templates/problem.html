@@ -4,12 +4,43 @@
 {% block content %}
     
 
-{% for pr in problem %}
-    <p>{{pr.name}}</p>
-    <p>{{pr.statement}}</p>
-    <p>{{pr.code}}</p>
-    <p>{{pr.difficulty}}</p>
-{% endfor %}
+
+{% if problem %}
+<div class="container my-4">
+    {% for pr in problem %}
+    <h4 class="text-center">{{pr.code}} : {{pr.name}} [ {{pr.difficulty}} ]</h4>
+    
+    <div>
+        <h3>Problem statement</h3>
+        <p>{{pr.statement}}</p>
+    </div>
+    <div>
+        <p><b>Input:</b></p>
+        <p>1 2 3 4</p>
+    </div>
+    <div>
+        <p><b>Constraints</b></p>
+        <p>0<=N<=10000</p>
+    </div>
+    <div>
+        <p><b>Output:</b></p>
+        <p>Print hello world in seperate line</p>
+    </div>
+    <div>
+        <p><b>Solution:</b></p>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <textarea class="form-control" name="solution" id="" cols="30" rows="10"></textarea>
+            <button type="submit" class="btn btn-primary m-2">Submit</button>
+            <button type="reset" class="btn btn-secondary m-2">Clear</button>
+        </form>
+    </div>
+    {% endfor %}
+    {% else %}
+    <h3 class="text-center my-4">No problem found</h3>
+    {% endif %}
+</div>
+    
     
 
 {% endblock content %}

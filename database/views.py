@@ -8,6 +8,9 @@ def home(request):
     return render(request, 'home.html',{'problems': problems})
 
 def problem(request,pk):
+    if request.method=="POST":
+        solution=request.POST["solution"]
+        print(solution)
     problemOne=Problem.objects.filter(id=pk).values
     # print(problemOne)
     return render(request, 'problem.html',{'problem': problemOne})
