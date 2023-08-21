@@ -2,61 +2,104 @@
 
 
 {% block css %}
-    <style>
-        #slno{
-            width: 5%;
-        }
-        #code,#diff{
-            width: 10%;
-        }
-        .problem-name{
-            width: 50%;
-            text-align: center;
-        }
-        .table{
-            width: 70%;
-        }
-        
-    </style>
+<style>
+    #slno {
+        width: 5%;
+    }
+
+    #code,
+    #diff {
+        width: 10%;
+    }
+
+    .problem-name {
+        width: 50%;
+        text-align: center;
+    }
+
+    .table {
+        width: 70%;
+    }
+</style>
 {% endblock css %}
-    
+
 
 {% block content %}
-    
+
 
 {% if problems %}
 <div class="container d-flex flex-column flex-wrap justify-content-center align-items-center my-3">
     <h3 class="text-center">Problem Set</h3>
-    <table class="table table-dark table-striped">
+        <form>
+            <div class="d-flex">
+                <select class="m-2" id="difficultySelect" name="difficulty">
+                    <option value="all">Difficulty</option>
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+                <input type="text" class="form-control m-2" id="searchInput" placeholder="Search">
+                <button class="btn btn-primary btn-sm m-2" type="submit">Sort</button>
+            </div>
+        </form>
+
+
+
+    <table class="table table-dark table-striped" id="dataTable">
         <thead>
-        <tr>
-        <th id="slno">SL.No.</th>
-          <th id="code">Code</th>
-          <th class="problem-name">Problems</th>
-          <th id="diff">Difficulty</th>
-        </tr>
-      </thead>
-      <tbody>
-          
-          {% for problem in problems %}
-          <tr>
-        <td>{{forloop.counter}}</td>
-        <td>{{problem.code}}</td>
-        <td class="problem-name">
-            <a class="text-decoration-none" href="problem/{{problem.id}}">{{problem.name}}</a>
-        </td>
-        <td>
-            {{problem.difficulty}}
-        </td>
-    </tr>
-    {% endfor %}
-</tbody>
-</table>
-{% else %}
-<h3 class="text-center">No problem found</h3>
-{% endif %}
+            <tr>
+                <th id="slno">SL.No.</th>
+                <th id="code">Code</th>
+                <th class="problem-name">Problems</th>
+                <th id="diff">Difficulty</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for problem in problems %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{problem.code}}</td>
+                <td class="problem-name">
+                    <a class="text-decoration-none" href="problem/{{problem.id}}">{{problem.name}}</a>
+                </td>
+                <td>
+                    {{problem.difficulty}}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <h3 class="text-center">No problem found</h3>
+    {% endif %}
 </div>
-    
-    
+
+<script>
+    let searchInput = document.getElementById("searchInput");
+    let dataTable = document.getElementById("dataTable");
+
+    searchInput.addEventListener("input", function () {
+        let searchTerm = searchInput.value.toLowerCase();
+        let rows = dataTable.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+
+        for (let i = 0; i < rows.length; i++) {
+            let row = rows[i];
+            let cells = row.getElementsByTagName("td");
+            let foundMatch = false;
+
+            for (let j = 1; j < cells.length - 1; j++) {
+                let cell = cells[j];
+                if (cell.textContent.toLowerCase().indexOf(searchTerm) > -1) {
+                    foundMatch = true;
+                    break;
+                }
+            }
+
+            row.style.display = foundMatch ? "" : "none";
+        }
+    });
+</script>
+
 
 {% endblock content %}

@@ -1,41 +1,69 @@
 {% extends 'base.html' %}
 
+{% comment %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/python/python.min.js"></script> 
+<script>
+    var editor = CodeMirror.fromTextArea(document.querySelector(".code-editor"), {
+        mode: "python",
+        theme: "default",
+        lineNumbers: true,
+    });
+</script>
+
+{% endcomment %}
+    
+    
 
 {% block content %}
     
 
 
-{% if problem %}
 <div class="container my-4">
-    {% for pr in problem %}
-    <h4 class="text-center">{{pr.code}} : {{pr.name}} [ {{pr.difficulty}} ]</h4>
+{% if problem %}
+    <h4 class="text-center">{{problem.code}} : {{problem.name}} [ {{problem.difficulty}} ]</h4>
     
     <div>
         <h3>Problem statement</h3>
-        <p>{{pr.statement}}</p>
+        <p>
+            {{problem.statement| safe}}
+        </p>
     </div>
     <div>
-        <p><b>Input:</b></p>
-        <p>1 2 3 4</p>
+        <p><b>Input format</b></p>
+        <p>{{problem.input_formate | safe}}</p>
+    </div>
+    <div>
+        <p><b>Output format</b></p>
+        <p>{{problem.output_formate | safe}}</p>
     </div>
     <div>
         <p><b>Constraints</b></p>
-        <p>0<=N<=10000</p>
+        <p>{{problem.problem_constraint | safe}}</p>
+    </div>
+    <h3>Example: </h3>
+    <div>
+        <p><b>Input:</b></p>
+        <p>
+            {{testcase.input | safe}}
+        </p>
     </div>
     <div>
         <p><b>Output:</b></p>
-        <p>Print hello world in seperate line</p>
+        <p>{{testcase.output | safe}}</p>
     </div>
     <div>
         <p><b>Solution:</b></p>
-        <form action="" method="POST">
+        <form method="POST">
             {% csrf_token %}
-            <textarea class="form-control" name="solution" id="" cols="30" rows="10"></textarea>
+            {{ solutionform.as_p }}
             <button type="submit" class="btn btn-primary m-2">Submit</button>
             <button type="reset" class="btn btn-secondary m-2">Clear</button>
         </form>
     </div>
-    {% endfor %}
+    
     {% else %}
     <h3 class="text-center my-4">No problem found</h3>
     {% endif %}
@@ -43,5 +71,5 @@
     
     
 
-{% endblock content %}
+{% endblock content %}    
     

@@ -18,8 +18,10 @@ from django.contrib import admin
 from django.urls import path,include,re_path
 
 urlpatterns = [
-    re_path(r'[accounts|account]/',include('account.urls',namespace="account")),
+    
+    path('accounts/',include('account.urls',namespace="account")),
     path('admin/', admin.site.urls),
-    path('',include('problempg.urls')),
+    path('',include('problempg.urls',namespace="problempg")),
     path('', include('home.urls',namespace="home")),
+    # path('djrichtextfield/', include('djrichtextfield.urls')),
 ]

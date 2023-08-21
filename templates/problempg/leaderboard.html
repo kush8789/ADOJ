@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+<div class="container d-flex flex-wrap justify-content-center align-items-center my-3">
+  <a class="btn btn-{% if 'all' in request.GET %}secondary{% else %}primary{% endif %} mx-3" href="?all=True"
+    role="button">Allsubmissions</a>
+  <a class="btn btn-{% if 'all' in request.GET %}primary{% else %}secondary{% endif %} mx-3" href="?all=False"
+    role="button">Mysubmissions</a>
+</div>
+
+<div class="container d-flex flex-wrap justify-content-center align-items-center my-3">
+
+{% if solutions %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th id="codeid">#</th>
+      <th>When</th>
+      <th>Who</th>
+      <th class="problem">Problem</th>
+      <th>Language</th>
+      <th>Verdict</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    {% for sol in solutions %}
+    <tr>
+      <td><a class="text-decoration-none" href="{% url 'problempg:solution' sol.id %}">{{sol.id}}</a></td>
+      <td>{{sol.submittedAt|date:"d-m-Y"}}</td>
+      <td>{{sol.username}}</td>
+      <td>
+        <a class="text-decoration-none"
+          href="{% url 'problempg:problem' sol.problem_code.id %}">{{sol.problem_code}}</a>
+      </td>
+      <td>
+        {{sol.language}}
+      </td>
+      <td>
+        {{sol.verdict}}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<h3 class="text-center">No submission found</h3>
+{% endif %}
+</div>
+
+
+
+
+{% endblock content %}
