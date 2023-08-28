@@ -23,7 +23,7 @@ EMAIL_HOST = "smtp.gmail.com"
 # EMAIL_HOST_USER = EMAIL_HOST_USER
 EMAIL_HOST_USER = "baranwalkush@gmail.com"
 # EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
-EMAIL_HOST_PASSWORD = "pwsoueaiekrbqlhc"
+EMAIL_HOST_PASSWORD = "password"
 # EMAIL_PORT = EMAIL_PORT
 EMAIL_PORT = 587
 
@@ -53,9 +53,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "account",
-    "problempg",
     "home",
     "ckeditor",
+    "contest"
     # 'djrichtextfield',
 ]
 
@@ -93,10 +93,22 @@ WSGI_APPLICATION = "OJ.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
+
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "adoj",
+        "USER": "postgres",
+        "PASSWORD": "password",
+        "HOST": "localhost",
+        "PORT": "5432",
+        # "OPTIONS": {"charset": "utf8"},  # Corrected "charset"
     }
 }
 
@@ -125,11 +137,13 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Kolkata"
 
-USE_I18N = True
+# USE_I18N = True
+USE_I18N = False
 
-USE_TZ = True
+# USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)

@@ -1,23 +1,30 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
 
+<style>
+    .code-editor {
+        background-color: #1e1e1e; /* Dark background color for code editor */
+        color: #d4d4d4; /* Text color */
+        font-family: "Courier New", monospace; /* Use a monospace font */
+        border: none; /* Remove borders */
+        resize: none; /* Prevent resizing */
+        overflow: auto; /* Enable scrollbars when content exceeds textarea height */
+        padding: 10px 20px;
+    }
+
+    .code-editor:focus {
+        outline: none; /* Remove the default focus outline */
+    }
+</style>
 
 <div class="container d-flex flex-column flex-wrap justify-content-center align-items-center my-3">
-{% if solution %}
-    
-    {% for sol in solution %}
-        <h5>{{sol.language}}</h5>
-        <textarea class="form-control" name="" id="" cols="30" rows="35" disabled>{{sol.solution_code}}</textarea>
-    {% endfor %}
-        
-{% else %}
-<h3 class="text-center">No code found</h3>
-{% endif %}
+    {% if solution %}
+    <h2>Solution Code</h2>
+    <h5> <strong>Language : </strong> {{solution.language}}</h5>
+    <pre class="form-control p-4 bg-secondary bg-opacity-25 fw-bold">{{ solution.solution_code }}</pre>
+    {% else %}
+    <h3 class="text-center">No code found</h3>
+    {% endif %}
 </div>
-    
-    
-  
-
 {% endblock content %}

@@ -29,12 +29,12 @@
 
     {% for sol in solutions %}
     <tr>
-      <td><a class="text-decoration-none" href="{% url 'problempg:solution' sol.id %}">{{sol.id}}</a></td>
+      <td><a class="text-decoration-none" href="{% url 'home:solution' sol.id %}">{{sol.id}}</a></td>
       <td>{{sol.submittedAt|date:"d-m-Y"}}</td>
       <td>{{sol.username}}</td>
       <td>
         <a class="text-decoration-none"
-          href="{% url 'problempg:problem' sol.problem_code.id %}">{{sol.problem_code}}</a>
+          href="{% url 'home:problem' sol.problem_code.id %}">{{sol.problem_code}}</a>
       </td>
       <td>
         {{sol.language}}

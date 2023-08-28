@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+
+{% block css %}
+<style>
+    /* Your existing CSS styles */
+</style>
+{% endblock css %}
+
+{% block content %}
+
+<header class="bg-primary text-white text-center py-4">
+    <h1>{{ contest.name }}</h1>
+</header>
+<main class="container mt-4">
+    <div class="row">
+
+        <div class="col-md-12">
+            <h2>Description</h2>
+            <p>{{ contest.description }}</p>
+        </div>
+        <div class="col-md-12">
+            <div class="button-container">
+                <!-- <button class="btn btn-primary" onclick="showContest()">Contest</button>
+                <button class="btn btn-secondary" onclick="showLeaderboard()">Leaderboard</button>
+                <button class="btn btn-dark" onclick="showSubmissions()">Submissions</button> -->
+                <a href="{% url 'contest:contestpage' pk=contest.pk %}" class="btn btn-primary">Problems</a>
+                <a href="{% url 'contest:contest_leaderboard' pk=contest.pk %}" class="btn btn-secondary">Leaderboard</a>
+                <a href="{% url 'contest:contest_submissions' pk=contest.pk %}" class="btn btn-dark">Submissions</a>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+{% if contest_problems %}
+    
+
+
+<section id="contest-section" class="container mt-4">
+    <div class="row">
+        <div class="col">
+            <h2>Contest Problems</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="problem-name">Problems</th>
+                        <th id="status">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for problem, status in contest_problems %}
+                    <tr>
+                        <td><a href="{% url 'contest:problem' pk1=contest.pk pk2=problem.id %}">{{ problem.code }}</a></td>
+                        <td>
+                            {% if status == "AC" %}
+                            <span class="text-bg-success rounded">Accepted</span>
+                            {% elif status == "WA" or status == "CE" %}
+                            <span class="text-bg-danger rounded">Not accepted</span>
+                            {% else %}
+                            <span class="text-bg-secondary rounded">NA</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+
+{% if leaderboard %}
+<section id="leaderboard-section" class="container mt-4">
+    <div class="row">
+        <div class="col">
+            <h2>Leaderboard</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>User</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in leaderboard %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ item.username.username }}</td>
+                        <td>{{ item.score }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+
+{% if submissions %}
+<section id="submissions-section" class="container mt-4">
+    <div class="row">
+        <div class="col">
+            <h2>Submissions</h2>
+            {% if submissions %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th id="codeid">#</th>
+                        <th>When</th>
+                        <th>Who</th>
+                        <th class="problem">Problem</th>
+                        <th>Language</th>
+                        <th>Verdict</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for submission in submissions %}
+                    <tr>
+                        <td><a class="text-decoration-none" href="{% url 'contest:solution' pk1=contest.pk pk2=submission.id %}">{{submission.id}}</a></td>
+                        <td>{{submission.submittedAt|date:"d-m-Y"}}</td>
+                        <td>{{submission.username}}</td>
+                        <td>
+                            <a class="text-decoration-none"
+                            href="{% url 'contest:problem' pk1=contest.pk pk2=submission.problem_code.id %}">{{submission.problem_code}}</a>
+                        </td>
+                        <td>
+                            {{submission.language}}
+                        </td>
+                        <td>
+                            {{submission.verdict}}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <h3 class="text-center">No submission found</h3>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- <script>
+    // JavaScript to toggle between contest, leaderboard, and submissions sections
+    function showContest() {
+        document.getElementById('contest-section').style.display = 'block';
+        document.getElementById('leaderboard-section').style.display = 'none';
+        document.getElementById('submissions-section').style.display = 'none';
+    }
+
+    function showLeaderboard() {
+        document.getElementById('contest-section').style.display = 'none';
+        document.getElementById('leaderboard-section').style.display = 'block';
+        document.getElementById('submissions-section').style.display = 'none';
+    }
+    
+    function showSubmissions() {
+        document.getElementById('contest-section').style.display = 'none';
+        document.getElementById('leaderboard-section').style.display = 'none';
+        document.getElementById('submissions-section').style.display = 'block';
+    }
+
+    // Show the initial section (you can choose contest, leaderboard, or submissions)
+    //showContest();
+</script> -->
+
+
+{% endblock content %}

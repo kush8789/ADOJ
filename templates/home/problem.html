@@ -19,6 +19,17 @@
 
 {% block content %}
     
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.3/codemirror.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.3/theme/dracula.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.3/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.3/mode/javascript/javascript.min.js"></script>
+<title>Code Editor</title>
+<style>
+    .CodeMirror {
+        height: 100%;
+        border: 1px solid #ccc;
+    }
+</style>
 
 
 <div class="container my-4">
@@ -58,7 +69,18 @@
         <p><b>Solution:</b></p>
         <form method="POST">
             {% csrf_token %}
-            {{ solutionform.as_p }}
+            <div class="d-flex">
+                <select class="m-2" name="language">
+                    <option value="cpp">C++</option>
+                    <option value="c">C</option>
+                    <option value="py">Python</option>
+                    <option value="java">Java</option>
+                </select>
+            </div>
+            <!-- {{ solutionform.as_p }} -->
+            <input type="hidden" id="code-content" name="solution_code" />
+            <div id="code-editor" style="height : 400px;" name="solution_code"></div>
+
             <button type="submit" class="btn btn-primary m-2">Submit</button>
             <button type="reset" class="btn btn-secondary m-2">Clear</button>
         </form>
@@ -70,6 +92,22 @@
 </div>
     
     
+<script>
+    const codeEditor = CodeMirror(document.getElementById('code-editor'), {
+        mode: 'javascript',
+        theme: 'dracula', // Change the theme as needed
+        lineNumbers: true,
+        autofocus: true,
+    });
 
+     // Listen for form submission
+     document.querySelector('form').addEventListener('submit', function(event) {
+        // Get the code editor content
+        const codeContent = codeEditor.getValue();
+        
+        // Update the hidden input field with the code content
+        document.getElementById('code-content').value = codeContent;
+    });
+</script>
 {% endblock content %}    
     

@@ -28,6 +28,6 @@ class SolutionForm(forms.ModelForm):
     fields=['language','solution_code']
     widgets={
       'language':forms.Select(choices=(("C","c"),("C++","cpp"),("Python","py")),attrs={'class': 'form-control my-2',}),
-      'solution_code': forms.Textarea(attrs={'class': 'form-control my-2 code-editor'}),
+      'solution_code': forms.Textarea(attrs={'class': 'form-control my-2 code-editor',}),
     }
     

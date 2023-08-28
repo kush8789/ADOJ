@@ -21,7 +21,7 @@ urlpatterns = [
     
     path('accounts/',include('account.urls',namespace="account")),
     path('admin/', admin.site.urls),
-    path('',include('problempg.urls',namespace="problempg")),
     path('', include('home.urls',namespace="home")),
+    path('contest/', include('contest.urls',namespace="contest")),
     # path('djrichtextfield/', include('djrichtextfield.urls')),
 ]

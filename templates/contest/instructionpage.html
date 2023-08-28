@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block css %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+    }
+
+    header {
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        font-size: 36px;
+    }
+
+    p {
+        font-size: 18px;
+    }
+</style>
+
+{% endblock css %}
+{% block content %}
+
+<div class="container rounded p-4 shadow mb-4 my-4">
+    <div class="jumbotron text-center">
+        <h1>Welcome to the ADOJ Coding Contest</h1>
+        <p>Test your coding skills and compete with others</p>
+    </div>
+
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow p-4 mb-4">
+                <h2>Contest Details</h2>
+                <ul>
+                    <li><strong>Date:</strong> {{ contest.contest_date|date:"F j, Y" }}</li>
+                    <li><strong>Time:</strong> {{ contest.start_time|time:"P" }} - {{ contest.end_time|time:"P" }}</li>
+                    <li><strong>Duration:</strong> 1 hour</li>
+                    <li><strong>Location:</strong> Online</li>
+                </ul>
+            </div>
+
+            <div class="card shadow p-4 mb-4">
+                <h2>Prizes</h2>
+                <ul>
+                    <li>1st Place: ₹300</li>
+                    <li>2nd Place: ₹200</li>
+                    <li>3rd Place: ₹100</li>
+                </ul>
+            </div>
+
+            <div class="card shadow p-4 mb-4">
+                <h3>Contest Rules:</h3>
+                <ul>
+                    <li>Participants must sign up for an ADOJ account in advance to participate.</li>
+                    <li>All participants will receive the same set of problems to solve.</li>
+                    <li>Points are awarded as follows:
+                        <ul>
+                            <li>Correct answer: 1 point</li>
+                            <li>Incorrect answer: 0 points</li>
+                        </ul>
+                    </li>
+                    <li>Participants must adhere to the ADOJ Code of Conduct.</li>
+                    <li>Any form of plagiarism will result in immediate disqualification.</li>
+                    <li>The decision of the judges is final.</li>
+                </ul>
+            </div>
+
+            <div class="card shadow p-4 mb-4">
+                <h2>Get Ready to Code</h2>
+                <p>Are you ready to take on the challenge?</p>
+                <a class="btn btn-primary" href="{% url 'contest:contestpage' contest.id %}"> Start Contest </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}

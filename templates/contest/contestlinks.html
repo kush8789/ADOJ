@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block css %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+    </style>
+
+{% endblock css %}
+{% block content %}
+
+<header>
+    <h1>Contests</h1>
+</header>
+<main>
+    <div id="contest-list">
+        {% for contest in upcoming_contests %}
+            <div class="shadow rounded p-4 m-2">
+                <a href="{% url 'contest:contest' contest.id %}">
+                    <h2>{{ contest.name }}</h2>
+                </a>
+                <p>{{ contest.contest_date|date:"F j, Y" }}</p>
+            </div>
+        {% empty %}
+            <div>
+                <h2 class="text-center">No upcoming contests</h2>
+            </div>
+        {% endfor %}
+    </div>
+</main>
+<main>
+    <div id="contest-list">
+        {% for contest in previous_contests %}
+            <div class="shadow rounded p-4 m-2">
+                <a href="{% url 'contest:contest' contest.id %}">
+                    <h2>{{ contest.name }}</h2>
+                </a>
+                <p>{{ contest.contest_date|date:"F j, Y" }}</p>
+            </div>
+        {% empty %}
+            <div>
+                <h2 class="text-center">No upcoming contests</h2>
+            </div>
+        {% endfor %}
+    </div>
+</main>
+
+{% endblock content %}
