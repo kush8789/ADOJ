@@ -25,7 +25,17 @@
 
 
 {% block content %}
-
+<div class="col-md-12">
+    {% if messages %}
+    <div class="messages">
+      {% for message in messages %}
+      <div {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+</div>
 
 {% if problems %}
 <div class="container d-flex flex-column flex-wrap justify-content-center align-items-center my-3">
