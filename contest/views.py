@@ -228,14 +228,14 @@ def problem(request, pk1, pk2):
     #     is_contest_day = False
 
     # Check if the contest has ended
-    if current_date < contest.contest_date:
+    if current_date > contest.contest_date:
         contest_has_ended = True
     else:
         contest_has_ended = False
 
     if request.method == "POST":
         if request.user.is_authenticated:
-            if not is_contest_live or not contest_has_ended:
+            if not is_contest_live and not contest_has_ended:
                 # Contest has ended or today is not the contest day
                 messages.error(
                     request,

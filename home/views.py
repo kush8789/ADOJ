@@ -226,12 +226,12 @@ def leaderboard(request):
         allsub = request.GET.get("all", None)
         if request.user.is_authenticated:
             solutions = Solution.objects.filter(username=request.user)
+        else:
             messages.error(
                 request,
                 "Please login to see submissions.",
                 extra_tags="alert alert-danger alert-dismissible fade show",
             )
-        else:
             allsub = "True"
         if allsub == "True":
             solutions = Solution.objects.all()

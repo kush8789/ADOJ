@@ -105,7 +105,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "adoj",
         "USER": "postgres",
-        "PASSWORD": "password",
+        "PASSWORD": "Kus@8789",
         "HOST": "localhost",
         "PORT": "5432",
         # "OPTIONS": {"charset": "utf8"},  # Corrected "charset"
