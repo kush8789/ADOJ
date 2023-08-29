@@ -229,8 +229,8 @@ def leaderboard(request):
         else:
             messages.error(
                 request,
-                "Please login to see submissions.",
-                extra_tags="alert alert-danger alert-dismissible fade show",
+                "Submissions Page.",
+                extra_tags="alert alert-success alert-dismissible fade show",
             )
             allsub = "True"
         if allsub == "True":
