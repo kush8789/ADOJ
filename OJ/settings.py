@@ -23,7 +23,7 @@ EMAIL_HOST = "smtp.gmail.com"
 # EMAIL_HOST_USER = EMAIL_HOST_USER
 EMAIL_HOST_USER = "baranwalkush@gmail.com"
 # EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
-EMAIL_HOST_PASSWORD = "pwsoueaiekrbqlhc"
+EMAIL_HOST_PASSWORD = "password"
 # EMAIL_PORT = EMAIL_PORT
 EMAIL_PORT = 587
 
@@ -105,7 +105,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "adoj",
         "USER": "postgres",
-        "PASSWORD": "Kus@8789",
+        "PASSWORD": "password",
         "HOST": "localhost",
         "PORT": "5432",
         # "OPTIONS": {"charset": "utf8"},  # Corrected "charset"
