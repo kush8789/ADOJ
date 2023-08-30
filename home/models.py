@@ -43,8 +43,8 @@ class Solution(models.Model):
 
 class Testcase(models.Model):
     problem = models.ForeignKey(Problem, on_delete=models.CASCADE)
-    input = RichTextField(default="", max_length=1000)
-    output = RichTextField(default="", max_length=1000)
+    input = models.TextField(default="", max_length=1000)
+    output = models.TextField(default="", max_length=1000)
 
     def __str__(self):
         return self.problem.code

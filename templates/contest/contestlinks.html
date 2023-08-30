@@ -41,6 +41,7 @@
 </header>
 <main>
     <div id="contest-list">
+        <h2>upcoming contests</h2>
         {% for contest in upcoming_contests %}
             <div class="shadow rounded p-4 m-2">
                 <a href="{% url 'contest:contest' contest.id %}">
@@ -57,6 +58,7 @@
 </main>
 <main>
     <div id="contest-list">
+        <h2>All contests</h2>
         {% for contest in previous_contests %}
             <div class="shadow rounded p-4 m-2">
                 <a href="{% url 'contest:contest' contest.id %}">
@@ -66,7 +68,7 @@
             </div>
         {% empty %}
             <div>
-                <h2 class="text-center">No upcoming contests</h2>
+                <h2 class="text-center">No previous contests</h2>
             </div>
         {% endfor %}
     </div>

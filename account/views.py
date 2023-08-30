@@ -118,7 +118,7 @@ def create_user(request):
                     current_site = get_current_site(request)
                     # Render HTML content from a template
                     html_content = render_to_string(
-                        "email_confirmation.html",
+                        "account/email_confirmation.html",
                         {
                             "username": username,
                             "domain": current_site.domain,
